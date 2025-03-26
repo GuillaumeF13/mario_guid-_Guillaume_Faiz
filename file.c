@@ -1,4 +1,4 @@
-#include <SDL2/SDL_image.h>
+#include <src/include/SDL2/SDL.h>
 
 #include "file.h"
 

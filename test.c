@@ -1,12 +1,25 @@
-#include <iostream>
-#include <SDL2/SDL.h>
+#include <stdio.h>
+#include <src/include/SDL2/SDL.h>
+
 #define WIDTH 800
-#define Height 600
+#define HEIGHT 600
 
-int main( int argc, char argv[])
-{
-    SDL_init(SDL_INIT_EVERYTHING);
-    //SDL_Window * window = SDL_CreateWindow("Hello world",SDL_WINDOWPOS_UNDEFINED,0,500,500, SDL_WINDOW_SHOWN);
-    SDL_Delay(1000);
+int main(int argc, char* argv[]) {
+    if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {
+        printf("SDL initialization failed: %s\n", SDL_GetError());
+        return 1;
+    }
 
+    SDL_Window* window = SDL_CreateWindow(
+        "Hello World",
+        SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
+        WIDTH, HEIGHT,
+        SDL_WINDOW_SHOWNje 
+    );
+
+    if (!window) {
+        printf("Window creation failed: %s\n", SDL_GetError());
+        SDL_Quit();
+        return 1;
+    }
 }

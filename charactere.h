@@ -7,7 +7,7 @@ Attention la map doit déjà être chargé avant de créer un charactère.
 #ifndef DEF_CHARACTERE
 #define DEF_CHARACTERE
     
-    #include <SDL2/SDL.h>
+    #include <src/include/SDL2/SDL.h>
     #include "file.h"
 
     #define WIDTH_MARIO 30 //largeur des images mario
