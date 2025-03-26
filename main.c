@@ -12,7 +12,7 @@ int init(SDL_Window **window, SDL_Renderer **renderer, int w, int h);
 
 int main(int argc, char *argv[])
 {
-    
+    //test
     return 0;
 }
 
