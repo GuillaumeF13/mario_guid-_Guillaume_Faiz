@@ -1,10 +1,13 @@
-#include <src/include/SDL2/SDL.h>
-#include <src/include/SDL2/SDL_image.h>
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
 #include <stdio.h>
 #include <stdlib.h>
 
 #include "file.h"
 #include "game.h"
+
+//Anotation Faiz: 
+//Anotation Guillaume: 
 
 //ligne de compilation gcc main.c file.c game.c event.c charactere.c -o mario -lSDL2main -lSDL2_image -lSDL2
 

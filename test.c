@@ -1,8 +1,11 @@
 #include <stdio.h>
-#include <src/include/SDL2/SDL.h>
+#include <SDL2/SDL.h>
 
 #define WIDTH 800
 #define HEIGHT 600
+
+//Anotation Faiz:
+
 
 int main(int argc, char* argv[]) {
     if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {

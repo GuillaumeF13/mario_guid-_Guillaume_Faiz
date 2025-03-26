@@ -3,11 +3,13 @@ Contient la création du charactère (mario) et les divers caractéristique qui 
 Va aussi gérer l'affichage des personnages et mosntres. 
 Attention la map doit déjà être chargé avant de créer un charactère. 
 */
+//Anotation Faiz:
+
 
 #ifndef DEF_CHARACTERE
 #define DEF_CHARACTERE
     
-    #include <src/include/SDL2/SDL.h>
+    #include <SDL2/SDL.h>
     #include "file.h"
 
     #define WIDTH_MARIO 30 //largeur des images mario

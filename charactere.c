@@ -2,7 +2,7 @@
 #include <stdio.h>
 
 #include "charactere.h"
-
+//Anotation Faiz:
 
 void chargerMario(Personnage* mario, Map* map, SDL_Renderer *renderer)
 {

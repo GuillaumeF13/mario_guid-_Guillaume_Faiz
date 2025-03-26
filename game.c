@@ -3,6 +3,8 @@
 #include "charactere.h"
 #include "event.h"
 
+//Anotation Faiz:
+
 int jouer(SDL_Renderer* renderer) {
     
 	//charger image et personnage. 

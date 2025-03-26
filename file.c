@@ -1,7 +1,8 @@
-#include <src/include/SDL2/SDL.h>
+#include <SDL2/SDL.h>
 
 #include "file.h"
-
+//Anotation Faiz:
+//Anotation Guillaume:
 
 /*permet de charger une image dans une SDL_Texture avec l'option SDL_TEXTUREACCESS_TARGET
 pour pouvoir modifier la texture après. */
