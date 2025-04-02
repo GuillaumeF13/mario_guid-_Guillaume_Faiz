@@ -17,7 +17,7 @@ int main(int argc, char* argv[]) {
         "Hello World",
         SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
         WIDTH, HEIGHT,
-        SDL_WINDOW_SHOWNje 
+        SDL_WINDOW_SHOWN 
     );
 
     if (!window) {
