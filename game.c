@@ -2,38 +2,77 @@
 #include "file.h"
 #include "charactere.h"
 #include "event.h"
+#include <SDL2/SDL.h>
+#include <stdio.h>
 
-//Anotation Faiz:
+#define WIDTH 800
+#define HEIGHT 600
+
+// Fonction pour initialiser une fenêtre blanche
+int initialiserFenetre(SDL_Window** window, SDL_Renderer** renderer) {
+
+
+    *window = SDL_CreateWindow(
+        "Mario 2D",
+        SDL_WINDOWPOS_CENTERED,
+        SDL_WINDOWPOS_CENTERED,
+        WIDTH,
+        HEIGHT,
+        SDL_WINDOW_SHOWN
+    );
+
+
+
+    *renderer = SDL_CreateRenderer(*window, -1, SDL_RENDERER_ACCELERATED);
+
+    // Remplir l'écran avec une couleur blanche
+    SDL_SetRenderDrawColor(*renderer, 255, 255, 255, 255);
+    SDL_RenderClear(*renderer);
+    SDL_RenderPresent(*renderer);
+
+    return 0;
+}
 
 int jouer(SDL_Renderer* renderer) {
-    
-	//charger image et personnage. 
-	
+    SDL_Window* window = NULL;
+
+    // Initialiser la fenêtre et le renderer
+    if (initialiserFenetre(&window, &renderer) != 0) {
+        return -1;
+    }
+
     int continuer = 1;
     SDL_Event events;
 
-    while(continuer){ //coeur du jeu ici, les actions seront repété pour faire le déplacement des différentes images, ...
-        while (SDL_PollEvent(&events))
-        {
-            switch (events.type)
-            {
-            case SDL_QUIT:
-                continuer = 0;
-                break;
-				
+    while (continuer) { // Boucle principale du jeu
+        while (SDL_PollEvent(&events)) {
+            switch (events.type) {
+                case SDL_QUIT:
+                    continuer = 0;
+                    break;
             }
         }
-        
-		//on gère les divers events.
-		
-        SDL_RenderPresent(renderer); // affiche le tout
-        
-        
-    }
-    
-	//a vous de compléter, au fur et à mesure, les deux fonctions en dessous pour bien faire le nettoyage. 
-    //LibererMap(map, sprites);
-    //freePersonnage(mario, goomba, nbGoomba);
 
-    return continuer;
+        // Pas besoin de redessiner constamment, la fenêtre reste blanche
+        SDL_Delay(16); // Limiter la boucle à environ 60 FPS
+    }
+
+    // Nettoyage des ressources
+    SDL_DestroyRenderer(renderer);
+    SDL_DestroyWindow(window);
+    SDL_Quit();
+
+    return 0;
+}
+
+int main() {
+    SDL_Renderer* renderer = NULL;
+
+    // Appeler la fonction jouer()
+    if (jouer(renderer) != 0) {
+        printf("Erreur lors de l'exécution du jeu.\n");
+        return -1;
+    }
+
+    return 0;
 }

@@ -31,7 +31,7 @@ Attention la map doit déjà être chargé avant de créer un charactère.
         int lvl, lvlperdu;
     };
 
-    void chargerMario(Personnage* mario, Map* map, SDL_Renderer *renderer);
+    void chargerMario(Personnage* mario, /*Map* map,*/ SDL_Renderer *renderer);
     void afficherPerso(Personnage* mario, int xscroll, int yscroll , SDL_Renderer *renderer);
     int chooseSpriteMovement(Personnage* mario, int numero1, int numero2);
     void freePersonnage(Personnage* mario, Personnage **goomba, int nbGoomba);
