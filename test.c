@@ -1,5 +1,9 @@
 #include <stdio.h>
 #include <SDL2/SDL.h>
+#include <time.h>
+#include <stdlib.h>
+#include <unistd.h>
+
 
 #define WIDTH 800
 #define HEIGHT 600
@@ -19,7 +23,7 @@ int main(int argc, char* argv[]) {
         WIDTH, HEIGHT,
         SDL_WINDOW_SHOWN 
     );
-
+    sleep(5);
     if (!window) {
         printf("Window creation failed: %s\n", SDL_GetError());
         SDL_Quit();
