@@ -1,8 +1,9 @@
-#include <SDL2/SDL_image.h>
-#include "file.h"
-#include <stdio.h>
-#include <stdlib.h>
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h> // <-- Ajoute cette ligne
 
+#include "file.h"
+//Anotation Faiz:
+//Anotation Guillaume:
 
 void lire_dimensions(FILE *fichier, int *largeur, int *hauteur) {
     char ligne[256];

@@ -3,6 +3,8 @@ Contient la création du charactère (mario) et les divers caractéristique qui 
 Va aussi gérer l'affichage des personnages et mosntres. 
 Attention la map doit déjà être chargé avant de créer un charactère. 
 */
+//Anotation Faiz:
+
 
 #ifndef DEF_CHARACTERE
 #define DEF_CHARACTERE
@@ -29,9 +31,10 @@ Attention la map doit déjà être chargé avant de créer un charactère.
         int lvl, lvlperdu;
     };
 
-    void chargerMario(Personnage* mario, Map* map, SDL_Renderer *renderer);
+    void chargerMario(Personnage* mario, /*Map* map,*/ SDL_Renderer *renderer);
     void afficherPerso(Personnage* mario, int xscroll, int yscroll , SDL_Renderer *renderer);
     int chooseSpriteMovement(Personnage* mario, int numero1, int numero2);
-    void freePersonnage(Personnage* mario, Personnage **goomba, int nbGoomba);
+    void freePersonnage(Personnage* mario/*, Personnage **goomba, int nbGoomba*/ );
     
+    Personnage* creerMario(); //déclare la fonction pour créer un mario dans le fichier character.c
 #endif

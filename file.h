@@ -2,6 +2,7 @@
 Gère les divers fichiers pour faire fonctionner le jeu, dont entre autres les diverses images avec la méthode load_image
 et la map. 
 */
+//Anotation Faiz:
 
 #ifndef DEF_FILE
 #define DEF_FILE

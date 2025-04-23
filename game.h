@@ -4,6 +4,8 @@ Ce fichier va appeler toutes les méthodes pour créer le personnage, la map, af
 Mais ne contient pas les déclarations des différentes  fonctions utilisées.
 */
 
+//Anotation Faiz:
+
 #ifndef DEF_GAME
 #define DEF_GAME
     #include <SDL2/SDL.h>

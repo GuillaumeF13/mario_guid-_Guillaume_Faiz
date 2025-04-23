@@ -6,6 +6,9 @@
 #include "file.h"
 #include "game.h"
 
+//Anotation Faiz: 
+//Anotation Guillaume: 
+
 //ligne de compilation gcc main.c file.c game.c event.c charactere.c -o mario -lSDL2main -lSDL2_image -lSDL2
 
 #define LARGEUR_FENETRE 1200
