@@ -3,6 +3,7 @@
 #include "charactere.h"
 #include "event.h"
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
 #include <stdio.h>
 
 #define WIDTH 800
@@ -44,6 +45,10 @@ int jouer(SDL_Renderer* renderer) {
     // Création de Mario
     Personnage* mario = creerMario();
 
+    mario->image = malloc(sizeof(SDL_Texture*) * NUMBER_IMAGE_MARIO);
+
+    mario->image[0] = loadImage("img/Mario1.png", renderer);
+
     int continuer = 1;
     SDL_Event events;
 
@@ -76,6 +81,7 @@ int jouer(SDL_Renderer* renderer) {
 
 int main() {
     SDL_Renderer* renderer = NULL;
+    IMG_Init(IMG_INIT_PNG);
 
     // Appeler la fonction jouer()
     if (jouer(renderer) != 0) {

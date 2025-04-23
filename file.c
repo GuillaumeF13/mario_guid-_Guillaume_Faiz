@@ -1,4 +1,5 @@
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h> // <-- Ajoute cette ligne
 
 #include "file.h"
 //Anotation Faiz:

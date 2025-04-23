@@ -67,8 +67,7 @@ void afficherPerso(Personnage* mario, int xscroll, int yscroll, SDL_Renderer *re
     rect.h = mario->position.h;
 
     // Affichage d'un rectangle rouge pour Mario
-    SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
-    SDL_RenderFillRect(renderer, &rect);
+    SDL_RenderCopy(renderer, mario->image[0], NULL, &rect);
 }
 
 
@@ -92,6 +91,3 @@ void freePersonnage(Personnage* mario) {
     }
 }
 
-/*
-using sdl_event  & sdl_waitevent sdlpollEvent with a case make so that when I press q arrow my character gose to left d goes to right
-*/
