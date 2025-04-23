@@ -57,9 +57,18 @@ Personnage* creerMario() {
     mario->lvlperdu = 0;
     return mario;
 }
-void afficherPerso(Personnage* mario, int xscroll, int yscroll , SDL_Renderer *renderer) {
+void afficherPerso(Personnage* mario, int xscroll, int yscroll, SDL_Renderer *renderer) {
+    if (mario == NULL || renderer == NULL) return;
 
-   
+    SDL_Rect rect;
+    rect.x = mario->position.x - xscroll;
+    rect.y = mario->position.y - yscroll;
+    rect.w = mario->position.w;
+    rect.h = mario->position.h;
+
+    // Affichage d'un rectangle rouge pour Mario
+    SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
+    SDL_RenderFillRect(renderer, &rect);
 }
 
 

@@ -41,6 +41,9 @@ int jouer(SDL_Renderer* renderer) {
         return -1;
     }
 
+    // Création de Mario
+    Personnage* mario = creerMario();
+
     int continuer = 1;
     SDL_Event events;
 
@@ -52,10 +55,16 @@ int jouer(SDL_Renderer* renderer) {
                     break;
             }
         }
+        // Effacer l'écran (fond blanc)
 
-        // Pas besoin de redessiner constamment, la fenêtre reste blanche
+        // Afficher Mario
+        afficherPerso(mario, 0, 0, renderer);
+
+        SDL_RenderPresent(renderer);
         SDL_Delay(16); // Limiter la boucle à environ 60 FPS
     }
+    // Libération mémoire
+    freePersonnage(mario);
 
     // Nettoyage des ressources
     SDL_DestroyRenderer(renderer);
