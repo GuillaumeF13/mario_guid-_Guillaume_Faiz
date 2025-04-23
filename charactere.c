@@ -12,7 +12,7 @@ void mario(Personnage* personnage) {
     personnage->image = NULL; 
 
 }
-
+// informations sur le personnage 
 void chargerMario(Personnage* mario /*, Map* map*/, SDL_Renderer *renderer)
 {
 	
@@ -33,6 +33,30 @@ void chargerMario(Personnage* mario /*, Map* map*/, SDL_Renderer *renderer)
     mario->lvlperdu = 0; // Aucun niveau perdu
 }
 
+// Crée et initialise un personnage (Mario) avec les valeurs par défaut
+Personnage* creerMario() {
+    Personnage* mario = malloc(sizeof(Personnage));
+    if (!mario) {
+        printf("Erreur d'allocation mémoire pour Mario\n");
+        return NULL;
+    }
+    mario->image = NULL;
+    mario->position.x = 0; // Position initiale en x
+    mario->position.y = 0; // Position initiale en y
+    mario->position.w = WIDTH_MARIO;
+    mario->position.h = HEIGHT_MARIO;
+    mario->jump = 0;
+    mario->jumptime = 0;
+    mario->gravite = 0;
+    mario->direction = 0;
+    mario->dernieredirection = 0;
+    mario->temp = 0;
+    mario->win = 0;
+    mario->invisible = 0;
+    mario->lvl = 1;
+    mario->lvlperdu = 0;
+    return mario;
+}
 void afficherPerso(Personnage* mario, int xscroll, int yscroll , SDL_Renderer *renderer) {
 
    

@@ -36,4 +36,5 @@ Attention la map doit déjà être chargé avant de créer un charactère.
     int chooseSpriteMovement(Personnage* mario, int numero1, int numero2);
     void freePersonnage(Personnage* mario, Personnage **goomba, int nbGoomba);
     
+    Personnage* creerMario(); //déclare la fonction pour créer un mario dans le fichier character.c
 #endif
