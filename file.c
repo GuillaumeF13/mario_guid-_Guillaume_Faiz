@@ -1,63 +1,93 @@
 #include <SDL2/SDL_image.h>
-
 #include "file.h"
+#include <stdio.h>
+#include <stdlib.h>
 
 
-/*permet de charger une image dans une SDL_Texture avec l'option SDL_TEXTUREACCESS_TARGET
-pour pouvoir modifier la texture après. */
-SDL_Texture *loadImage(const char path[], SDL_Renderer *renderer)
-{
-    SDL_Surface *surface = NULL; 
-    SDL_Texture *tmp = NULL, *texture = NULL;
-    surface = IMG_Load(path);
-    if(NULL == surface)
-    {
-        fprintf(stderr, "Erreur IMG_Load : %s", SDL_GetError());
-        return NULL;
+void lire_dimensions(FILE *fichier, int *largeur, int *hauteur) {
+    char ligne[256];
+
+
+    fgets(ligne, sizeof(ligne), fichier);
+
+
+    if (fgets(ligne, sizeof(ligne), fichier) != NULL) {
+        if (sscanf(ligne, "%d %d", largeur, hauteur) != 2) {
+            fprintf(stderr, "Erreur : format des dimensions invalide\n");
+            exit(EXIT_FAILURE);
+        }
+    } else {
+        fprintf(stderr, "Erreur : dimensions non trouvées dans le fichier\n");
+        exit(EXIT_FAILURE);
     }
-    tmp = SDL_CreateTextureFromSurface(renderer, surface);
-    if(NULL == tmp)
-    {
-        fprintf(stderr, "Erreur SDL_CreateTextureFromSurface : %s", SDL_GetError());
-        return NULL;
+}
+
+
+int **lire_map(FILE *fichier, int largeur, int hauteur) {
+    int **map = malloc(hauteur * sizeof(int *));
+    if (!map) {
+        perror("Erreur d'allocation mémoire");
+        exit(EXIT_FAILURE);
     }
-    texture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA8888, 
-                            SDL_TEXTUREACCESS_TARGET, surface->w, surface->h); 
-    if(texture == NULL) 
-    {
-        fprintf(stderr, "Erreur SDL_CreateTextureFromSurface : %s", SDL_GetError());
-        return NULL;
+
+    for (int i = 0; i < hauteur; i++) {
+        map[i] = malloc(largeur * sizeof(int));
+        if (!map[i]) {
+            perror("Erreur d'allocation mémoire");
+            exit(EXIT_FAILURE);
+        }
+
+        for (int j = 0; j < largeur; j++) {
+            if (fscanf(fichier, "%d", &map[i][j]) != 1) {
+                fprintf(stderr, "Erreur de lecture à la ligne %d colonne %d\n", i, j);
+                exit(EXIT_FAILURE);
+            }
+        }
     }
-    SDL_SetRenderTarget(renderer, texture); /* La cible de rendu est maintenant texture. */
-    SDL_SetTextureBlendMode(tmp, SDL_BLENDMODE_NONE); /* gère la transparence du fond des images*/
-    SDL_RenderCopy(renderer, tmp, NULL, NULL); /* On copie tmp sur texture */
-    SDL_DestroyTexture(tmp); //nettoyage
-    SDL_FreeSurface(surface); //nettoyage
-    SDL_SetRenderTarget(renderer, NULL); /* La cible de rendu est de nouveau le renderer. */
-    return texture;
+
+    return map;
 }
 
-Sprites* chargerImages(SDL_Renderer *renderer) {
-    Sprites* sprites;
-    
-	
-    return sprites;
+
+void afficher_map(int **map, int largeur, int hauteur) {
+    for (int i = 0; i < hauteur; i++) {
+        for (int j = 0; j < largeur; j++) {
+            printf("%d ", map[i][j]);
+        }
+        printf("\n");
+    }
 }
 
-Map* ChargerMap(char* level)
-{
-    Map* map = malloc(sizeof(Map));
-	
 
-	return map;
+void liberer_map(int **map, int hauteur) {
+    for (int i = 0; i < hauteur; i++) {
+        free(map[i]);
+    }
+    free(map);
 }
 
-void afficherMap(Map* map, Sprites* sprites, SDL_Renderer *renderer) {
+// Fonction principale
+int main() {
+    int largeur = 0, hauteur = 0;
+    FILE *fichier = fopen("niveau0.lvl", "r");
+    if (!fichier) {
+        perror("Erreur lors de l'ouverture du fichier");
+        return EXIT_FAILURE;
+    }
 
-    
+    lire_dimensions(fichier, &largeur, &hauteur);
+    int **map = lire_map(fichier, largeur, hauteur);
+    fclose(fichier);
+
+    printf("Dimensions de la map : %d x %d\n", largeur, hauteur);
+    printf("Contenu de la map :\n");
+    afficher_map(map, largeur, hauteur);
+
+    liberer_map(map, hauteur);
+    return 0;
 }
 
-void LibererMap(Map* map, Sprites* sprites)
-{
-  
-}
+
+
+
+
