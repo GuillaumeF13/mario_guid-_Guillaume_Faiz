@@ -68,9 +68,19 @@ int chooseSpriteMovement(Personnage* mario, int numero1, int numero2) {
     
     return numero1;
 }
-
-void freePersonnage(Personnage* mario, Personnage **goomba, int nbGoomba) {
-    
+// libère la mémoire allouée pour le personnage et ses images
+void freePersonnage(Personnage* mario) {
+    if (mario != NULL) {
+        if (mario->image != NULL) {
+            for (int i = 0; i < NUMBER_IMAGE_MARIO; i++) {
+                if (mario->image[i] != NULL) {
+                    SDL_DestroyTexture(mario->image[i]);
+                }
+            }
+            free(mario->image);
+        }
+        free(mario);
+    }
 }
 
 /*
