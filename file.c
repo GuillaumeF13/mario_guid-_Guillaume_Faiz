@@ -5,90 +5,42 @@
 //Anotation Faiz:
 //Anotation Guillaume:
 
-void lire_dimensions(FILE *fichier, int *largeur, int *hauteur) {
+void lire_dimensions_map(const char* nom_fichier, int* largeur, int* hauteur) {
+    FILE* fichier = fopen("niveau0.lvl", "r");
+    if (!fichier) {
+        perror("Erreur lors de l'ouverture du fichier");
+        exit(EXIT_FAILURE);
+    }
+
     char ligne[256];
 
+    // Lire et ignorer la première ligne
+    if (fgets(ligne, sizeof(ligne), fichier) == NULL) {
+        fprintf(stderr, "Erreur lors de la lecture de la première ligne\n");
+        fclose(fichier);
+        exit(EXIT_FAILURE);
+    }
 
-    fgets(ligne, sizeof(ligne), fichier);
-
-
+    // Lire la ligne suivante contenant largeur et hauteur
     if (fgets(ligne, sizeof(ligne), fichier) != NULL) {
         if (sscanf(ligne, "%d %d", largeur, hauteur) != 2) {
-            fprintf(stderr, "Erreur : format des dimensions invalide\n");
+            fprintf(stderr, "Erreur : format de dimensions invalide\n");
+            fclose(fichier);
             exit(EXIT_FAILURE);
         }
     } else {
-        fprintf(stderr, "Erreur : dimensions non trouvées dans le fichier\n");
-        exit(EXIT_FAILURE);
-    }
-}
-
-
-int **lire_map(FILE *fichier, int largeur, int hauteur) {
-    int **map = malloc(hauteur * sizeof(int *));
-    if (!map) {
-        perror("Erreur d'allocation mémoire");
+        fprintf(stderr, "Erreur : dimensions manquantes\n");
+        fclose(fichier);
         exit(EXIT_FAILURE);
     }
 
-    for (int i = 0; i < hauteur; i++) {
-        map[i] = malloc(largeur * sizeof(int));
-        if (!map[i]) {
-            perror("Erreur d'allocation mémoire");
-            exit(EXIT_FAILURE);
-        }
-
-        for (int j = 0; j < largeur; j++) {
-            if (fscanf(fichier, "%d", &map[i][j]) != 1) {
-                fprintf(stderr, "Erreur de lecture à la ligne %d colonne %d\n", i, j);
-                exit(EXIT_FAILURE);
-            }
-        }
-    }
-
-    return map;
-}
-
-
-void afficher_map(int **map, int largeur, int hauteur) {
-    for (int i = 0; i < hauteur; i++) {
-        for (int j = 0; j < largeur; j++) {
-            printf("%d ", map[i][j]);
-        }
-        printf("\n");
-    }
-}
-
-
-void liberer_map(int **map, int hauteur) {
-    for (int i = 0; i < hauteur; i++) {
-        free(map[i]);
-    }
-    free(map);
-}
-
-// Fonction principale
-int main() {
-    int largeur = 0, hauteur = 0;
-    FILE *fichier = fopen("niveau0.lvl", "r");
-    if (!fichier) {
-        perror("Erreur lors de l'ouverture du fichier");
-        return EXIT_FAILURE;
-    }
-
-    lire_dimensions(fichier, &largeur, &hauteur);
-    int **map = lire_map(fichier, largeur, hauteur);
     fclose(fichier);
+}
 
-    printf("Dimensions de la map : %d x %d\n", largeur, hauteur);
-    printf("Contenu de la map :\n");
-    afficher_map(map, largeur, hauteur);
-
-    liberer_map(map, hauteur);
+int main() {
+    int largeur, hauteur;
+    lire_dimensions_map("niveau0.lvl", &largeur, &hauteur);
+    printf("Largeur : %d, Hauteur : %d\n", largeur, hauteur);
     return 0;
 }
-
-
-
-
 
