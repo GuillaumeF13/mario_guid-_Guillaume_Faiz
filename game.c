@@ -42,6 +42,14 @@ int jouer(SDL_Renderer* renderer) {
         return -1;
     }
 
+    Map* map = malloc(sizeof(Map));
+    if (!map) {
+        perror("Erreur d'allocation mémoire pour la structure Map");
+        return EXIT_FAILURE;
+    }
+    lire_dimensions_map("level/niveau0.lvl", map);
+    printf("Carte chargée : largeur = %d, hauteur = %d\n", map->width, map->height);
+
     // Création de Mario
     Personnage* mario = creerMario();
 
@@ -59,6 +67,7 @@ int jouer(SDL_Renderer* renderer) {
         SDL_Delay(16);
     }
 
+    free(map);
     freePersonnage(mario);
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);

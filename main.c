@@ -54,7 +54,21 @@ int main(int argc, char** argv) {
                 running = 0;
             }
         }
-
+        switch(event.type) {
+            case SDL_QUIT:
+                running = 0;
+                break;
+            case SDL_KEYDOWN:
+                switch(event.key.keysym.sym) {
+                    case SDLK_ESCAPE:
+                        running = 0;
+                        break;
+                    case SDLK_1:
+                        jouer(renderer);
+                        break;
+                }
+                break;
+        }
         SDL_RenderClear(renderer);
         SDL_RenderCopy(renderer, texture, NULL, NULL);
         SDL_RenderPresent(renderer);

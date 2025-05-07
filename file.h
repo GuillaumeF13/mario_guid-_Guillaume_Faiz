@@ -29,6 +29,7 @@ et la map.
         int traverser; //signifie si on peut traverser ou non le bloc (0 = oui, 1 = non)
     };
 
+    void lire_dimensions_map(const char* nom_fichier, Map* map);
     SDL_Texture *loadImage(const char path[], SDL_Renderer *renderer);
     Sprites* chargerImages(SDL_Renderer *renderer);
     Map* ChargerMap(char* level);
