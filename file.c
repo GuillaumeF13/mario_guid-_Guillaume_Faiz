@@ -5,8 +5,17 @@
 //Anotation Faiz:
 //Anotation Guillaume:
 
-void lire_dimensions_map(const char* nom_fichier, int* largeur, int* hauteur) {
-    FILE* fichier = fopen("level/niveau0.lvl", "r");
+SDL_Texture *loadImage(const char path[], SDL_Renderer *renderer) {
+    SDL_Surface *surface = IMG_Load(path);
+    if (!surface) return NULL;
+    SDL_Texture *texture = SDL_CreateTextureFromSurface(renderer, surface);
+    SDL_FreeSurface(surface);
+    return texture;
+}
+
+
+void lire_dimensions_map(const char* nom_fichier, Map* map) {
+    FILE* fichier = fopen(nom_fichier, "r");
     if (!fichier) {
         perror("Erreur lors de l'ouverture du fichier");
         exit(EXIT_FAILURE);
@@ -14,22 +23,22 @@ void lire_dimensions_map(const char* nom_fichier, int* largeur, int* hauteur) {
 
     char ligne[256];
 
-    // Lire et ignorer la première ligne
+    
     if (fgets(ligne, sizeof(ligne), fichier) == NULL) {
-        fprintf(stderr, "Erreur lors de la lecture de la première ligne\n");
+        fprintf(stderr, "Erreur : fichier vide ou ligne illisible\n");
         fclose(fichier);
         exit(EXIT_FAILURE);
     }
 
-    // Lire la ligne suivante contenant largeur et hauteur
+    
     if (fgets(ligne, sizeof(ligne), fichier) != NULL) {
-        if (sscanf(ligne, "%d %d", largeur, hauteur) != 2) {
+        if (sscanf(ligne, "%d %d", &map->width, &map->height) != 2) {
             fprintf(stderr, "Erreur : format de dimensions invalide\n");
             fclose(fichier);
             exit(EXIT_FAILURE);
         }
     } else {
-        fprintf(stderr, "Erreur : dimensions manquantes\n");
+        fprintf(stderr, "Erreur : dimensions manquantes dans le fichier\n");
         fclose(fichier);
         exit(EXIT_FAILURE);
     }
@@ -37,10 +46,4 @@ void lire_dimensions_map(const char* nom_fichier, int* largeur, int* hauteur) {
     fclose(fichier);
 }
 
-int main() {
-    int largeur, hauteur;
-    lire_dimensions_map("niveau0.lvl", &largeur, &hauteur);
-    printf("Largeur : %d, Hauteur : %d\n", largeur, hauteur);
-    return 0;
-}
 

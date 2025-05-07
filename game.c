@@ -45,13 +45,35 @@ int jouer(SDL_Renderer* renderer) {
     // Création de Mario
     Personnage* mario = creerMario();
 
+    // Chargement de l'image de Mario
     mario->image = malloc(sizeof(SDL_Texture*) * NUMBER_IMAGE_MARIO);
-
     mario->image[0] = loadImage("img/Mario1.png", renderer);
 
     int continuer = 1;
     SDL_Event events;
 
+    while (continuer) {
+        // ... boucle du jeu ...
+        afficherPerso(mario, 0, 0, renderer);
+        SDL_RenderPresent(renderer);
+        SDL_Delay(16);
+    }
+
+    freePersonnage(mario);
+    SDL_DestroyRenderer(renderer);
+    SDL_DestroyWindow(window);
+    SDL_Quit();
+
+    return 0;
+}
+
+
+
+
+
+
+    //Fenetre précédente creer parce que github ne fonctionner pas
+/*
     while (continuer) { // Boucle principale du jeu
         while (SDL_PollEvent(&events)) {
             switch (events.type) {
@@ -63,31 +85,16 @@ int jouer(SDL_Renderer* renderer) {
         // Effacer l'écran (fond blanc)
 
         // Afficher Mario
-        afficherPerso(mario, 0, 0, renderer);
+        
 
         SDL_RenderPresent(renderer);
         SDL_Delay(16); // Limiter la boucle à environ 60 FPS
     }
-    // Libération mémoire
-    freePersonnage(mario);
-
-    // Nettoyage des ressources
+    //Nettoyage des ressources
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
     SDL_Quit();
 
     return 0;
 }
-
-int main() {
-    SDL_Renderer* renderer = NULL;
-    IMG_Init(IMG_INIT_PNG);
-
-    // Appeler la fonction jouer()
-    if (jouer(renderer) != 0) {
-        printf("Erreur lors de l'exécution du jeu.\n");
-        return -1;
-    }
-
-    return 0;
-}
+*/
