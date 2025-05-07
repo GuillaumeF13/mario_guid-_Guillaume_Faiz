@@ -73,20 +73,9 @@ void afficherPerso(Personnage* mario, int xscroll, int yscroll, SDL_Renderer *re
 
 //retourne soit numéro1 soit numéro2 pour alterner entre 2 sprite sur un mouvement.
 int chooseSpriteMovement(Personnage* mario, int numero1, int numero2) {
-        Personnage* mario = creerMario();
-
-    mario->image = malloc(sizeof(SDL_Texture*) * NUMBER_IMAGE_MARIO);
-
-    mario->image[0] = loadImage("img/Mario1.png", renderer);
-
-    int continuer = 1;
-    SDL_Event events;
-    return numero1;
+    if (!mario) return numero1;
+    return (mario->temp % 2 == 0) ? numero1 : numero2;
 }
-
-        // Affiche mario
-        afficherPerso(mario, 0, 0, renderer);
-
 
 
 // libère la mémoire allouée pour le personnage et ses images

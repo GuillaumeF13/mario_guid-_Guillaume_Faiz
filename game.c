@@ -41,17 +41,28 @@ int jouer(SDL_Renderer* renderer) {
     if (initialiserFenetre(&window, &renderer) != 0) {
         return -1;
     }
-}
 
-int main() {
-    SDL_Renderer* renderer = NULL;
-    IMG_Init(IMG_INIT_PNG);
+    // Création de Mario
+    Personnage* mario = creerMario();
 
-    // Appeler la fonction jouer()
-    if (jouer(renderer) != 0) {
-        printf("Erreur lors de l'exécution du jeu.\n");
-        return -1;
+    // Chargement de l'image de Mario
+    mario->image = malloc(sizeof(SDL_Texture*) * NUMBER_IMAGE_MARIO);
+    mario->image[0] = loadImage("img/Mario1.png", renderer);
+
+    int continuer = 1;
+    SDL_Event events;
+
+    while (continuer) {
+        // ... boucle du jeu ...
+        afficherPerso(mario, 0, 0, renderer);
+        SDL_RenderPresent(renderer);
+        SDL_Delay(16);
     }
+
+    freePersonnage(mario);
+    SDL_DestroyRenderer(renderer);
+    SDL_DestroyWindow(window);
+    SDL_Quit();
 
     return 0;
 }

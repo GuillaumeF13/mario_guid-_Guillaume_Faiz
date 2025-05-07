@@ -5,6 +5,14 @@
 //Anotation Faiz:
 //Anotation Guillaume:
 
+SDL_Texture *loadImage(const char path[], SDL_Renderer *renderer) {
+    SDL_Surface *surface = IMG_Load(path);
+    if (!surface) return NULL;
+    SDL_Texture *texture = SDL_CreateTextureFromSurface(renderer, surface);
+    SDL_FreeSurface(surface);
+    return texture;
+}
+
 void lire_dimensions(FILE *fichier, int *largeur, int *hauteur) {
     char ligne[256];
 
@@ -68,7 +76,8 @@ void liberer_map(int **map, int hauteur) {
 }
 
 // Fonction principale
-int main() {
+
+/*
     int largeur = 0, hauteur = 0;
     FILE *fichier = fopen("niveau0.lvl", "r");
     if (!fichier) {
@@ -83,12 +92,5 @@ int main() {
     printf("Dimensions de la map : %d x %d\n", largeur, hauteur);
     printf("Contenu de la map :\n");
     afficher_map(map, largeur, hauteur);
-
-    liberer_map(map, hauteur);
-    return 0;
-}
-
-
-
-
+*/
 
