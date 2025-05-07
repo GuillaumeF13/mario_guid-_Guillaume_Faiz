@@ -35,13 +35,8 @@ int initialiserFenetre(SDL_Window** window, SDL_Renderer** renderer) {
 }
 
 int jouer(SDL_Renderer* renderer) {
-    SDL_Window* window = NULL;
 
-    // Initialiser la fenêtre et le renderer
-    if (initialiserFenetre(&window, &renderer) != 0) {
-        return -1;
-    }
-
+    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
     Map* map = malloc(sizeof(Map));
     if (!map) {
         perror("Erreur d'allocation mémoire pour la structure Map");
@@ -56,22 +51,19 @@ int jouer(SDL_Renderer* renderer) {
     // Chargement de l'image de Mario
     mario->image = malloc(sizeof(SDL_Texture*) * NUMBER_IMAGE_MARIO);
     mario->image[0] = loadImage("img/Mario1.png", renderer);
-
+    
     int continuer = 1;
     SDL_Event events;
 
     while (continuer) {
+        SDL_RenderClear(renderer);
         // ... boucle du jeu ...
         afficherPerso(mario, 0, 0, renderer);
         SDL_RenderPresent(renderer);
-        SDL_Delay(16);
     }
 
-    free(map);
-    freePersonnage(mario);
-    SDL_DestroyRenderer(renderer);
-    SDL_DestroyWindow(window);
-    SDL_Quit();
+    //free(map);
+    //freePersonnage(mario);
 
     return 0;
 }

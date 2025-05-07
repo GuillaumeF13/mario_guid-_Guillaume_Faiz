@@ -47,27 +47,24 @@ int main(int argc, char** argv) {
         return EXIT_FAILURE;
     }
 
-    int running = 1;
+    int running = 1; //charge les évenement clavier
     while (running) {
         while (SDL_PollEvent(&event)) {
-            if (event.type == SDL_QUIT) {
-                running = 0;
+            switch(event.type) {
+                case SDL_QUIT:
+                    running = 0;
+                    break;
+                case SDL_KEYDOWN:
+                    switch(event.key.keysym.sym) {
+                        case SDLK_ESCAPE:
+                            running = 0;
+                            break;
+                        case SDLK_SPACE:
+                            jouer(renderer);
+                            break;
+                    }
+                    break;
             }
-        }
-        switch(event.type) {
-            case SDL_QUIT:
-                running = 0;
-                break;
-            case SDL_KEYDOWN:
-                switch(event.key.keysym.sym) {
-                    case SDLK_ESCAPE:
-                        running = 0;
-                        break;
-                    case SDLK_1:
-                        jouer(renderer);
-                        break;
-                }
-                break;
         }
         SDL_RenderClear(renderer);
         SDL_RenderCopy(renderer, texture, NULL, NULL);
