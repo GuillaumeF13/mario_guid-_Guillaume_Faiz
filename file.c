@@ -6,7 +6,7 @@
 //Anotation Guillaume:
 
 void lire_dimensions_map(const char* nom_fichier, int* largeur, int* hauteur) {
-    FILE* fichier = fopen("niveau0.lvl", "r");
+    FILE* fichier = fopen("level/niveau0.lvl", "r");
     if (!fichier) {
         perror("Erreur lors de l'ouverture du fichier");
         exit(EXIT_FAILURE);

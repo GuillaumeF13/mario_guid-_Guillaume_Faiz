@@ -23,7 +23,7 @@ int main(int argc, char** argv) {
         return EXIT_FAILURE;
     }
 
-    if (SDL_CreateWindowAndRenderer(1200, 1200, 0, &window, &renderer) != 0) {
+    if (SDL_CreateWindowAndRenderer(800, 800, 0, &window, &renderer) != 0) {
         printf("SDL_CreateWindowAndRenderer Error: %s\n", SDL_GetError());
         SDL_Quit();
         return EXIT_FAILURE;

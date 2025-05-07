@@ -1,0 +1,16 @@
+{
+	"folders": [
+		{
+			"path": "../../Projetfaizguillaume/ProjectMario"
+		},
+		{
+			"name": "mario_guid-_Guillaume_Faiz",
+			"path": "."
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"sdl_image.h": "c"
+		}
+	}
+}
