@@ -37,7 +37,7 @@ int initialiserFenetre(SDL_Window** window, SDL_Renderer** renderer) {
 int jouer(SDL_Renderer* renderer) {
 
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-    /*Map* map = malloc(sizeof(Map));
+    Map* map = malloc(sizeof(Map));
     if (!map) {
         perror("Erreur d'allocation mémoire pour la structure Map");
         return EXIT_FAILURE;
@@ -51,14 +51,14 @@ int jouer(SDL_Renderer* renderer) {
     // Chargement de l'image de Mario
     mario->image = malloc(sizeof(SDL_Texture*) * NUMBER_IMAGE_MARIO);
     mario->image[0] = loadImage("img/Mario1.png", renderer);
-    */
+    
     int continuer = 1;
     SDL_Event events;
 
     while (continuer) {
         SDL_RenderClear(renderer);
         // ... boucle du jeu ...
-        //afficherPerso(mario, 0, 0, renderer);
+        afficherPerso(mario, 0, 0, renderer);
         SDL_RenderPresent(renderer);
     }
 
