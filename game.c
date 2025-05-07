@@ -41,42 +41,6 @@ int jouer(SDL_Renderer* renderer) {
     if (initialiserFenetre(&window, &renderer) != 0) {
         return -1;
     }
-
-    // Création de Mario
-    Personnage* mario = creerMario();
-
-    mario->image = malloc(sizeof(SDL_Texture*) * NUMBER_IMAGE_MARIO);
-
-    mario->image[0] = loadImage("img/Mario1.png", renderer);
-
-    int continuer = 1;
-    SDL_Event events;
-
-    while (continuer) { // Boucle principale du jeu
-        while (SDL_PollEvent(&events)) {
-            switch (events.type) {
-                case SDL_QUIT:
-                    continuer = 0;
-                    break;
-            }
-        }
-        // Effacer l'écran (fond blanc)
-
-        // Afficher Mario
-        afficherPerso(mario, 0, 0, renderer);
-
-        SDL_RenderPresent(renderer);
-        SDL_Delay(16); // Limiter la boucle à environ 60 FPS
-    }
-    // Libération mémoire
-    freePersonnage(mario);
-
-    // Nettoyage des ressources
-    SDL_DestroyRenderer(renderer);
-    SDL_DestroyWindow(window);
-    SDL_Quit();
-
-    return 0;
 }
 
 int main() {
@@ -91,3 +55,35 @@ int main() {
 
     return 0;
 }
+
+
+
+
+
+
+    //Fenetre précédente creer parce que github ne fonctionner pas
+/*
+    while (continuer) { // Boucle principale du jeu
+        while (SDL_PollEvent(&events)) {
+            switch (events.type) {
+                case SDL_QUIT:
+                    continuer = 0;
+                    break;
+            }
+        }
+        // Effacer l'écran (fond blanc)
+
+        // Afficher Mario
+        
+
+        SDL_RenderPresent(renderer);
+        SDL_Delay(16); // Limiter la boucle à environ 60 FPS
+    }
+    //Nettoyage des ressources
+    SDL_DestroyRenderer(renderer);
+    SDL_DestroyWindow(window);
+    SDL_Quit();
+
+    return 0;
+}
+*/
