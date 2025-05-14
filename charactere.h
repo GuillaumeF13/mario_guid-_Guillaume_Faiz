@@ -29,6 +29,7 @@ Attention la map doit déjà être chargé avant de créer un charactère.
         int win; //vaut 1 si le personnage gagne, -1 si il perd, 0 sinon. 
         int invisible; //utilisé pour les goombas quand il meurt vaut 1 dans ce cas, 0 si en vit.
         int lvl, lvlperdu;
+
     };
 
     void chargerMario(Personnage* mario, /*Map* map,*/ SDL_Renderer *renderer);

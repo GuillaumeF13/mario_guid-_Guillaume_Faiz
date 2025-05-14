@@ -31,6 +31,7 @@ void chargerMario(Personnage* mario /*, Map* map*/, SDL_Renderer *renderer)
     mario->invisible = 0; // Mario est visible
     mario->lvl = 1; // Niveau initial
     mario->lvlperdu = 0; // Aucun niveau perdu
+
 }
 
 // Crée et initialise un personnage (Mario) avec les valeurs par défaut
@@ -41,6 +42,7 @@ Personnage* creerMario() {
         return NULL;
     }
     mario->image = NULL;
+
     mario->position.x = 0; // Position initiale en x
     mario->position.y = 0; // Position initiale en y
     mario->position.w = WIDTH_MARIO;

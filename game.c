@@ -42,7 +42,7 @@ int jouer(SDL_Renderer* renderer) {
         perror("Erreur d'allocation mémoire pour la structure Map");
         return EXIT_FAILURE;
     }
-    lire_dimensions_map("level/niveau0.lvl", map);
+    //lire_dimensions_map("level/niveau0.lvl", map);
     printf("Carte chargée : largeur = %d, hauteur = %d\n", map->width, map->height);
 
     // Création de Mario
@@ -51,33 +51,44 @@ int jouer(SDL_Renderer* renderer) {
     // Chargement de l'image de Mario
     mario->image = malloc(sizeof(SDL_Texture*) * NUMBER_IMAGE_MARIO);
     mario->image[0] = loadImage("img/Mario1.png", renderer);
-    
+
     int continuer = 1;
     SDL_Event events;
 
     while (continuer) {
-        // ... boucle du jeu ..
-        int direction = getDirection(&events);
-            if (direction == 1) { /* aller à droite */ 
-            printf("1\n");
-            }
-          else if (direction == 2) { /* aller à  gauche */ 
-          }
-
-          else if (direction == 3) { /* sauter */ 
-
-          }
-        SDL_RenderClear(renderer);
-        afficherPerso(mario, 0, 0, renderer);
-        SDL_RenderPresent(renderer);
+    while (SDL_PollEvent(&events)) {
+        switch (events.type) {
+            case SDL_QUIT:
+                continuer = 0;
+                break;
+            case SDL_KEYDOWN:
+                if (events.key.keysym.sym == SDLK_ESCAPE) {
+                    continuer = 0;
+                }
+                // Ici, on traite la direction directement
+                int direction = getDirection(&events);
+                if (direction == 1) {
+                    printf("Mario se déplace vers la droite\n");
+                } else if (direction == 2) {
+                    printf("Mario se déplace vers la gauche\n");
+                } else if (direction == 3) {
+                    printf("Mario saute\n");
+                }
+                break;
+        }
     }
 
-    //free(map);
-    //freePersonnage(mario);
+    SDL_RenderClear(renderer);
+    afficherPerso(mario, 0, 0, renderer);
+    SDL_RenderPresent(renderer);
+}
+
+    // Libération des ressources
+    free(map);
+    freePersonnage(mario);
 
     return 0;
 }
-
 
 
 
