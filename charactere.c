@@ -31,7 +31,13 @@ void chargerMario(Personnage* mario /*, Map* map*/, SDL_Renderer *renderer)
     mario->invisible = 0; // Mario est visible
     mario->lvl = 1; // Niveau initial
     mario->lvlperdu = 0; // Aucun niveau perdu
-
+    mario->image = malloc(sizeof(SDL_Texture*) * NUMBER_IMAGE_MARIO);
+    mario->image[0] = loadImage("img/Mario1.png", renderer);
+    mario->image[1] = loadImage("img/Mario2.png", renderer);
+    mario->image[2] = loadImage("img/Mario3.png", renderer);
+    mario->image[3] = loadImage("img/Mario4.png", renderer);
+    mario->image[4] = loadImage("img/Mario5.png", renderer);
+    mario->image[5] = loadImage("img/Mario6.png", renderer);
 }
 
 // Crée et initialise un personnage (Mario) avec les valeurs par défaut

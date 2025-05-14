@@ -49,8 +49,6 @@ int jouer(SDL_Renderer* renderer) {
     Personnage* mario = creerMario();
 
     // Chargement de l'image de Mario
-    mario->image = malloc(sizeof(SDL_Texture*) * NUMBER_IMAGE_MARIO);
-    mario->image[0] = loadImage("img/Mario1.png", renderer);
 
     int continuer = 1;
     SDL_Event events;
@@ -65,11 +63,12 @@ int jouer(SDL_Renderer* renderer) {
                 if (events.key.keysym.sym == SDLK_ESCAPE) {
                     continuer = 0;
                 }
-                // Ici, on traite la direction directement
                 int direction = getDirection(&events);
                 if (direction == 1) {
+                    mario->position.x += 10; // Déplace Mario vers la droite
                     printf("Mario se déplace vers la droite\n");
                 } else if (direction == 2) {
+                    mario->position.x -= 10; // Déplace Mario vers la gauche
                     printf("Mario se déplace vers la gauche\n");
                 } else if (direction == 3) {
                     printf("Mario saute\n");
