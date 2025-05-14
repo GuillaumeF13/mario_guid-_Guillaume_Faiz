@@ -15,5 +15,6 @@ et si le niveau est fini (win et loose).
     int sortiDecors(Map* map, SDL_Rect perso);
     void mapScroll(Map* map, Personnage* mario);
     int niveauFini(SDL_Renderer *renderer, Personnage *mario);
-
+    int getDirection(SDL_Event *event);
+    
 #endif

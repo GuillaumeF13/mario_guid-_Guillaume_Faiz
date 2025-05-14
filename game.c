@@ -56,8 +56,18 @@ int jouer(SDL_Renderer* renderer) {
     SDL_Event events;
 
     while (continuer) {
+        // ... boucle du jeu ..
+        int direction = getDirection(&events);
+            if (direction == 1) { /* aller à droite */ 
+            printf("1\n");
+            }
+          else if (direction == 2) { /* aller à  gauche */ 
+          }
+
+          else if (direction == 3) { /* sauter */ 
+
+          }
         SDL_RenderClear(renderer);
-        // ... boucle du jeu ...
         afficherPerso(mario, 0, 0, renderer);
         SDL_RenderPresent(renderer);
     }

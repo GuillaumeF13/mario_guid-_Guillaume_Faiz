@@ -27,7 +27,20 @@ int collisionHautBas(Map* map, SDL_Rect perso, Sprites* imageDecors) {
     
     return 0;   
 }
-
+//fonction Déplacement personnage
+int getDirection(SDL_Event *event) {
+    if (event->type == SDL_KEYDOWN) {
+        switch (event->key.keysym.sym) {
+            case SDLK_d:
+                return 1; // droite
+            case SDLK_q:
+                return 2; // gauche
+            case SDLK_z:
+                return 3; // saut
+        }
+    }
+    return 0; // aucune direction
+}
 
 
 //retourne 1 si il y a une collision entre le perso et le décor, et 0 si non
